@@ -24,14 +24,16 @@ class MatchmakingProxy(ConanFile):
 
     def requirements(self):
         self.requires("range-v3/0.12.0@werto87/stable")
-        self.requires("certify/0.0.1@werto87/stable")
-        self.requires("boost/1.77.0")
+        self.requires("certify/cci.20201114")
+        self.requires("boost/1.78.0")
         self.requires("confu_soci/0.2.0@werto87/stable")
         self.requires("libsodium/1.0.18")
         self.requires("confu_json/0.0.8@werto87/stable")
         self.requires("magic_enum/0.7.2")
         self.requires("catch2/2.13.7")
         self.requires("pipes/1.0.0")
+        self.requires("sml/1.1.4")
+        
 
     def source(self):
         if self.version != "latest":
