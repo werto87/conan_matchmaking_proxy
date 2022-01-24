@@ -1,4 +1,4 @@
-from conans import ConanFile, tools
+from conans import ConanFile,CMake, tools
 from conans.tools import check_min_cppstd
 import os
 
@@ -11,7 +11,9 @@ class MatchmakingProxy(ConanFile):
     license = "BSL-1.0"
     url = "https://github.com/conan-io/conan-center-index"
     settings = "compiler"
-    no_copy_source = True
+    exports_sources = "src/*"
+    generators = "cmake"
+    
 
     @property
     def _source_subfolder(self):
@@ -45,10 +47,19 @@ class MatchmakingProxy(ConanFile):
             extracted_dir = self.name +"-main"
             os.rename(extracted_dir, self._source_subfolder)
 
+        
+
     def package(self):
         # This should lead to an Include path like #include "include_folder/IncludeFile.hxx"
         self.copy("*.h*", dst="include/"+self.name,
                   src="source_subfolder/"+self.name)
+        self.copy("*.c*", dst="include/"+self.name,
+                  src="source_subfolder/"+self.name)  
+# TODO fix undifined references
 
-    def package_id(self):
-        self.info.header_only()
+    # def package_id(self):
+       
+
+
+    def package_info(self):
+        self.cpp_info.srcdirs.append("include/"+self.name +"/database")

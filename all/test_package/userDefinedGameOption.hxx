@@ -5,11 +5,11 @@
 #include <optional>
 #include <string>
 
-BOOST_FUSION_DEFINE_STRUCT((shared_class),
+BOOST_FUSION_DEFINE_STRUCT((user_matchmaking),
                            GameOption, ) // TODO-TEMPLATE add game options
 
 std::optional<std::string> inline errorInGameOption(
-    shared_class::GameOption const &) {
+    user_matchmaking::GameOption const &) {
   // TODO-TEMPLATE check Game option
   return std::nullopt;
 }
