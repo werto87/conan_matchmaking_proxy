@@ -6,7 +6,7 @@ required_conan_version = ">=1.51.1"
 
 
 class ConfuSociConan(ConanFile):
-    name = "lib_name"
+    name = "matchmaking_proxy"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
@@ -17,11 +17,21 @@ class ConfuSociConan(ConanFile):
             del self.options.fPIC
 
     def configure(self):
-        self.options["soci"].with_boost = True
-        self.options["soci"].with_sqlite3 = True
+        self.options["boost"].header_only = True
+
 
     def requirements(self):
-        self.requires("boost/1.83.0")
+        self.requires("boost/1.85.0", force=True)
+        self.requires("durak/1.0.5", force=True)
+        self.requires("confu_soci/[<1]")
+        self.requires("magic_enum/[>=0.9.5 <10]")
+        self.requires("certify/cci.20201114")
+        self.requires("libsodium/1.0.18")
+        self.requires("confu_json/1.1.0", force=True)
+        self.requires("sml/1.1.11")
+        self.requires("range-v3/0.12.0")
+        self.requires("corrade/2020.06")
+        self.requires("login_matchmaking_game_shared/latest")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
