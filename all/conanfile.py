@@ -21,16 +21,15 @@ class ConfuSociConan(ConanFile):
 
 
     def requirements(self):
-        self.requires("boost/1.85.0", force=True)
+        self.requires("boost/1.85.0", force=True,transitive_headers=True)
         self.requires("durak/1.0.5", force=True)
-        self.requires("confu_soci/[<1]")
+        self.requires("confu_soci/[<1]",transitive_headers=True)
         self.requires("magic_enum/[>=0.9.5 <10]")
         self.requires("certify/cci.20201114")
         self.requires("libsodium/1.0.18")
-        self.requires("confu_json/1.1.0", force=True)
+        self.requires("confu_json/1.1.0", force=True,transitive_headers=True)
         self.requires("sml/1.1.11")
         self.requires("range-v3/0.12.0")
-        self.requires("corrade/2020.06")
         self.requires("login_matchmaking_game_shared/0.0.0")
 
     def source(self):
