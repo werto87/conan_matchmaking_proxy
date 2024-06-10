@@ -31,7 +31,7 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("range-v3/0.12.0")
         self.requires("corrade/2020.06")
-        self.requires("login_matchmaking_game_shared/latest")
+        self.requires("login_matchmaking_game_shared/0.0.0")
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
