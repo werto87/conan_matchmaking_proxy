@@ -1,18 +1,13 @@
 from conan import ConanFile
-from conan.tools.cmake import CMake, cmake_layout
+from conan.tools.cmake import CMake, cmake_layout, CMakeToolchain
 from conan.tools.files import get
 
 required_conan_version = ">=1.51.1"
-         # MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS
-         # MATCHMAKING_PROXY_LOG_MY_WEBSOCKET
-         # MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE
-         # MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END
-         # MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME
 
 class ConfuSociConan(ConanFile):
     name = "matchmaking_proxy"
     settings = "os", "compiler", "build_type", "arch"
-    generators = "CMakeDeps", "CMakeToolchain"
+    generators = "CMakeDeps"
 
     options = {
         "fPIC":                                        [True, False],
@@ -55,13 +50,17 @@ class ConfuSociConan(ConanFile):
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
 
+    def generate(self):
+        tc = CMakeToolchain(self)
+        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS"]  = self.options.with_log_co_spawn_print_exceptions
+        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET"]  = self.options.with_log_my_websocket
+        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END"]  = self.options.with_my_websocket_read_end
+        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = self.options.with_log_for_state_machine
+        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME"]  = self.options.with_log_object_to_string_with_object_name
+        tc.generate()
+
     def build(self):
         cmake = CMake(self)
-        cmake.definitions["MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS"]  = self.options.with_log_co_spawn_print_exceptions
-        cmake.definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET"]  = self.options.with_log_my_websocket
-        cmake.definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END"]  = self.options.with_my_websocket_read_end
-        cmake.definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = self.options.with_log_for_state_machine
-        cmake.definitions["MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME"]  = self.options.with_log_object_to_string_with_object_name
         cmake.configure()
         cmake.build()
 
