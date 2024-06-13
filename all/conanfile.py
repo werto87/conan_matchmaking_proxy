@@ -52,11 +52,16 @@ class ConfuSociConan(ConanFile):
 
     def generate(self):
         tc = CMakeToolchain(self)
-        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS"]  = self.options.with_log_co_spawn_print_exceptions
-        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET"]  = self.options.with_log_my_websocket
-        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END"]  = self.options.with_my_websocket_read_end
-        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = self.options.with_log_for_state_machine
-        tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME"]  = self.options.with_log_object_to_string_with_object_name
+        if self.options.with_log_co_spawn_print_exceptions:
+            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS"] = None 
+        if self.options.with_log_my_websocket:    
+            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET"]  = None
+        if self.options.with_my_websocket_read_end:
+            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END"]  = None
+        if self.options.with_log_for_state_machine:    
+            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = None
+        if self.options.with_log_object_to_string_with_object_name:
+            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME"]  = None
         tc.generate()
 
     def build(self):
