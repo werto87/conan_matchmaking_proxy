@@ -31,21 +31,17 @@ class ConfuSociConan(ConanFile):
         if self.settings.os == "Windows":
             del self.options.fPIC
 
-    def configure(self):
-        self.options["boost"].header_only = True
-
-
     def requirements(self):
         self.requires("boost/1.85.0", force=True,transitive_headers=True)
-        self.requires("durak/1.0.5", force=True)
         self.requires("confu_soci/[<1]",transitive_headers=True)
         self.requires("magic_enum/[>=0.9.5 <10]")
-        self.requires("certify/cci.20201114", force=True,transitive_headers=True)
+        self.requires("certify/cci.20201114@modern-durak", force=True,transitive_headers=True)
         self.requires("libsodium/1.0.18", force=True,transitive_headers=True)
-        self.requires("confu_json/1.1.0", force=True,transitive_headers=True)
+        self.requires("confu_json/1.1.1", force=True,transitive_headers=True)
         self.requires("sml/1.1.11")
         self.requires("range-v3/0.12.0")
-        self.requires("login_matchmaking_game_shared/0.0.0")
+        self.requires("login_matchmaking_game_shared/latest")
+        self.requires("my_web_socket/0.0.8",transitive_headers=True)
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
@@ -77,4 +73,5 @@ class ConfuSociConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.libs = [self.name]
+        self.cpp_info.components[self.name].requires = ["range-v3::range-v3","sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
+        self.cpp_info.components[self.name].libs = [self.name]
