@@ -41,19 +41,13 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("range-v3/0.12.0")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/0.0.8",transitive_headers=True)
+        self.requires("my_web_socket/0.0.9",transitive_headers=True)
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
 
     def generate(self):
         tc = CMakeToolchain(self)
-        if self.options.with_log_co_spawn_print_exceptions:
-            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_CO_SPAWN_PRINT_EXCEPTIONS"] = None 
-        if self.options.with_log_my_websocket:    
-            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET"]  = None
-        if self.options.with_my_websocket_read_end:
-            tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_MY_WEBSOCKET_READ_END"]  = None
         if self.options.with_log_for_state_machine:    
             tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = None
         if self.options.with_log_object_to_string_with_object_name:
