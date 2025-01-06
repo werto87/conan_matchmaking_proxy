@@ -11,18 +11,12 @@ class ConfuSociConan(ConanFile):
 
     options = {
         "fPIC":                                        [True, False],
-        "with_log_co_spawn_print_exceptions":          [True, False],
-        "with_log_my_websocket":                       [True, False],
-        "with_my_websocket_read_end":                  [True, False],
         "with_log_for_state_machine":                  [True, False],
         "with_log_object_to_string_with_object_name":  [True, False],
     }
 
     default_options = {
         "fPIC":                                        True,
-        "with_log_co_spawn_print_exceptions":          False,
-        "with_log_my_websocket":                       False,
-        "with_my_websocket_read_end":                  False,
         "with_log_for_state_machine":                  False,
         "with_log_object_to_string_with_object_name":  False,
     }
@@ -39,9 +33,15 @@ class ConfuSociConan(ConanFile):
         self.requires("libsodium/1.0.18", force=True,transitive_headers=True)
         self.requires("confu_json/1.1.1", force=True,transitive_headers=True)
         self.requires("sml/1.1.11")
-        self.requires("range-v3/0.12.0")
+        self.requires("confu_algorithm/1.2.0")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/0.0.9",transitive_headers=True)
+        self.requires("my_web_socket/0.1.1",transitive_headers=True)
+
+
+
+
+
+
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
@@ -67,5 +67,5 @@ class ConfuSociConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.components[self.name].requires = ["range-v3::range-v3","sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
+        self.cpp_info.components[self.name].requires = ["confu_algorithm::confu_algorithm", "range-v3::range-v3","sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
         self.cpp_info.components[self.name].libs = [self.name]
