@@ -67,5 +67,5 @@ class ConfuSociConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.components[self.name].requires = ["confu_algorithm::confu_algorithm", "range-v3::range-v3","sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
+        self.cpp_info.components[self.name].requires = ["confu_algorithm::confu_algorithm", "sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
         self.cpp_info.components[self.name].libs = [self.name]
