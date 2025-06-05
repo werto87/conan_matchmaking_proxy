@@ -31,7 +31,7 @@ class ConfuSociConan(ConanFile):
         self.requires("magic_enum/[>=0.9.5 <10]")
         self.requires("certify/cci.20201114@modern-durak", force=True,transitive_headers=True)
         self.requires("libsodium/1.0.18", force=True,transitive_headers=True)
-        self.requires("confu_json/1.1.1", force=True,transitive_headers=True)
+        self.requires("confu_json/1.1.1@modern-durak", force=True,transitive_headers=True)
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
