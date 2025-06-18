@@ -35,8 +35,8 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/0.1.1",transitive_headers=True)
-
+        self.requires("my_web_socket/0.1.3",transitive_headers=True)
+        self.requires("sqlite3/3.44.2")
 
 
 
@@ -67,5 +67,5 @@ class ConfuSociConan(ConanFile):
         cmake.install()
 
     def package_info(self):
-        self.cpp_info.components[self.name].requires = ["confu_algorithm::confu_algorithm", "sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
+        self.cpp_info.components[self.name].requires = ["sqlite3::sqlite3","confu_algorithm::confu_algorithm", "sml::sml","my_web_socket::my_web_socket","login_matchmaking_game_shared::login_matchmaking_game_shared", "boost::headers","certify::_certify","boost::filesystem","confu_soci::confu_soci","libsodium::libsodium","confu_json::confu_json","magic_enum::magic_enum"]
         self.cpp_info.components[self.name].libs = [self.name]
