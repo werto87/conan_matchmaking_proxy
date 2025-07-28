@@ -13,12 +13,14 @@ class ConfuSociConan(ConanFile):
         "fPIC":                                        [True, False],
         "with_log_for_state_machine":                  [True, False],
         "with_log_object_to_string_with_object_name":  [True, False],
+        "with_ssl_verification":                       [True, False],
     }
 
     default_options = {
         "fPIC":                                        True,
         "with_log_for_state_machine":                  False,
         "with_log_object_to_string_with_object_name":  False,
+        "with_ssl_verification":                       True
     }
 
     def config_options(self):
@@ -26,16 +28,17 @@ class ConfuSociConan(ConanFile):
             del self.options.fPIC
 
     def requirements(self):
-        self.requires("boost/1.86.0",transitive_headers=True)
-        self.requires("confu_soci/[<1]",transitive_headers=True)
-        self.requires("magic_enum/[>=0.9.5 <10]")
-        self.requires("certify/cci.20201114@modern-durak", force=True,transitive_headers=True)
+        self.requires("boost/1.86.0",force=True,transitive_headers=True)
+        self.requires("confu_soci/1.0.0",transitive_headers=True)
+        self.requires("magic_enum/0.9.6")
+        if self.options.with_ssl_verification:
+            self.requires("certify/cci.20201114@modern-durak", force=True,transitive_headers=True)
         self.requires("libsodium/1.0.18", force=True,transitive_headers=True)
         self.requires("confu_json/1.1.1@modern-durak", force=True,transitive_headers=True)
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/0.1.3",transitive_headers=True)
+        self.requires("my_web_socket/1.0.0",transitive_headers=True)
         self.requires("sqlite3/3.44.2")
 
 
