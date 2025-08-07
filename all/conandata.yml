@@ -1,5 +1,5 @@
 sources:
-  2.0.0:
-    url: https://github.com/werto87/matchmaking_proxy/archive/refs/tags/v2.0.0.tar.gz
-    sha256: 2116ec86346a576b99cdd7fc288669b0312df8b1a4122159f7468cd32dbba513        
+  2.1.1:
+    url: https://github.com/werto87/matchmaking_proxy/archive/refs/tags/v2.1.1.tar.gz
+    sha256: daaf4dea33ca83c10cf4df575bdf084215240250c4e5d45890f378c52393653c        
 
