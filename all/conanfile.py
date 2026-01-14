@@ -38,7 +38,7 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/2.0.2",transitive_headers=True)
+        self.requires("my_web_socket/2.0.5",transitive_headers=True)
         self.requires("sqlite3/3.44.2")
         self.requires("openssl/3.5.2",force=True)
 
