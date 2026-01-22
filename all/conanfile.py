@@ -28,7 +28,7 @@ class ConfuSociConan(ConanFile):
             del self.options.fPIC
 
     def requirements(self):
-        self.requires("boost/1.86.0",force=True,transitive_headers=True)
+        self.requires("boost/1.90.0",force=True,transitive_headers=True)
         self.requires("confu_soci/1.0.0",transitive_headers=True)
         self.requires("magic_enum/0.9.6")
         if self.options.with_ssl_verification:
@@ -38,7 +38,7 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/2.0.5",transitive_headers=True)
+        self.requires("my_web_socket/3.0.1",transitive_headers=True)
         self.requires("sqlite3/3.44.2")
         self.requires("openssl/3.5.2",force=True)
 
