@@ -14,13 +14,15 @@ class ConfuSociConan(ConanFile):
         "with_log_for_state_machine":                  [True, False],
         "with_log_object_to_string_with_object_name":  [True, False],
         "with_ssl_verification":                       [True, False],
+        "log_boost_asio": [True, False],
     }
 
     default_options = {
         "fPIC":                                        True,
         "with_log_for_state_machine":                  False,
         "with_log_object_to_string_with_object_name":  False,
-        "with_ssl_verification":                       True
+        "with_ssl_verification":                       True,
+        "log_boost_asio":                              False
     }
 
     def config_options(self):
@@ -38,12 +40,16 @@ class ConfuSociConan(ConanFile):
         self.requires("sml/1.1.11")
         self.requires("confu_algorithm/1.2.1")
         self.requires("login_matchmaking_game_shared/latest")
-        self.requires("my_web_socket/3.0.3",transitive_headers=True)
+        self.requires("my_web_socket/4.0.1",transitive_headers=True)
         self.requires("sqlite3/3.44.2")
         self.requires("openssl/3.5.2",force=True)
 
     def source(self):
         get(self, **self.conan_data["sources"][self.version], strip_root=True)
+
+    def configure(self):
+        if self.options == "log_boost_asio":
+            self.options["my_web_socket"].log_boost_asio = True
 
     def generate(self):
         tc = CMakeToolchain(self)
@@ -51,6 +57,7 @@ class ConfuSociConan(ConanFile):
             tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_FOR_STATE_MACHINE"]  = None
         if self.options.with_log_object_to_string_with_object_name:
             tc.preprocessor_definitions["MATCHMAKING_PROXY_LOG_OBJECT_TO_STRING_WITH_OBJECT_NAME"]  = None
+        tc.variables["LOG_BOOST_ASIO"] = self.options.log_boost_asio
         tc.generate()
 
     def build(self):
