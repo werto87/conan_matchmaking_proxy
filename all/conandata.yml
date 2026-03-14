@@ -1,5 +1,5 @@
 sources:
-  4.3.5:
-    url: https://github.com/werto87/matchmaking_proxy/archive/refs/tags/v4.3.5.tar.gz
-    sha256: 799a646d7be16b1f7a61dacc4644095aa1c619186fff0e2fe2db115517e147e2        
+  4.3.7:
+    url: https://github.com/werto87/matchmaking_proxy/archive/refs/tags/v4.3.7.tar.gz
+    sha256: cd958b184331e835bc347f8c53caa6fd63940c3125092dfe9b4b2dd719d10b45        
 
