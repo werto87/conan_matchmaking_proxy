@@ -2,6 +2,6 @@
 #include <cassert>
 
 int main() {
-  assert(averageRating(10,5) == 2);
+  assert(matchmaking_proxy::averageRating(10,5) == 2);
   return 0;
 }
